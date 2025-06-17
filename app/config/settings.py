@@ -362,7 +362,7 @@ def get_private_ip():
 
 # Set the allowed hosts to the cookie domain
 # Adding the private ip allows the health check to work
-ALLOWED_HOSTS = [SESSION_COOKIE_DOMAIN, get_private_ip(), '127.0.0.1']
+ALLOWED_HOSTS = ["*"]
 
 # Security options
 SECURE_HSTS_SECONDS = int(os.environ.get("SECURE_HSTS_SECONDS", "0"))
