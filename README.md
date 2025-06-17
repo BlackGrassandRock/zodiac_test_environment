@@ -13,5 +13,48 @@ In the era of Deep Learning, developing robust machine learning solutions to pro
 * Algorithms: Deploy machine learning solutions for clinical validation.
 
 If you would like to start your own website, or contribute to the development of the framework, please see [the docs](https://comic.github.io/grand-challenge.org/).
-# zodiac_test_environment
-# zodiac_test_environment
+
+
+
+**Installation and Running the Project on Ubuntu**
+
+The following commands install all necessary libraries and dependencies, set up Docker, and launch the project. This setup is intended to get the project running smoothly on an Ubuntu system.
+
+
+
+# Update system and install essential packages
+sudo apt update && sudo apt install -y \
+    git \
+    make \
+    python3-pip
+
+# Install Docker and Docker Compose
+sudo apt update
+sudo apt install -y ca-certificates curl gnupg
+
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+  sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) \
+  signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Add the current user to the docker group
+sudo usermod -aG docker $USER
+newgrp docker
+
+# Clone the project repository
+git clone https://github.com/BlackGrassandRock/zodiac_test_environment
+cd grand-challenge.org
+
+# Set Docker group ID environment variable
+echo "DOCKER_GID=$(getent group docker | cut -d: -f3)" > .env
+
+# Run the project server
+make runserver
