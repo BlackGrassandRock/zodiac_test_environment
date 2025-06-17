@@ -51,7 +51,7 @@ newgrp docker
 
 # Clone the project repository
 git clone https://github.com/BlackGrassandRock/zodiac_test_environment
-cd grand-challenge.org
+cd zodiac_test_environment
 
 # Set Docker group ID environment variable
 echo "DOCKER_GID=$(getent group docker | cut -d: -f3)" > .env

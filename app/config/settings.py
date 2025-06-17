@@ -356,12 +356,13 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = os.environ.get(
 
 
 def get_private_ip():
+    print(f"Private ip: {socket.gethostbyname(socket.gethostname())}")
     return socket.gethostbyname(socket.gethostname())
 
 
 # Set the allowed hosts to the cookie domain
 # Adding the private ip allows the health check to work
-ALLOWED_HOSTS = [SESSION_COOKIE_DOMAIN, get_private_ip()]
+ALLOWED_HOSTS = [SESSION_COOKIE_DOMAIN, get_private_ip(), '127.0.0.1']
 
 # Security options
 SECURE_HSTS_SECONDS = int(os.environ.get("SECURE_HSTS_SECONDS", "0"))
